@@ -1,0 +1,30 @@
+Hacker Premier League
+
+Frontend : HTML/CSS
+Backend  : Python-Flask
+Database : MongoDB
+
+Database Server : MongoDB's Atlas
+Hosted 		    : AWS
+
+To run locally:
+	1. Install requirements from "requirements.txt" file using pip.
+	2. Add Database details in config.py.
+	3. Run the "local_run.py" python file.
+
+
+To Host in AWS:
+	
+	Req:
+		python3.8
+		packages from "requirements.txt"
+		gunicorn3
+		nginx server
+
+	1. Run flask in gunicorn3 as service.
+	2. Set nginx to serve the user request to gunicorn.
+
+	For detailed hosting in aws, visit - https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04
+
+
+

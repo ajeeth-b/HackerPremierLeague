@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block head_content %}
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<h1 style="text-align: center; margin: 40px 0px 20px 0px;">Hacker Premier League</h1>
+
+<!-- Adding new team Form -->
+<div id="addTeamModel" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="teamForm">
+        <br>
+        <p id='newTeamError' style="color: red"></p>
+        <label style=" font-size: 25px;padding-bottom: 10px;"> Team Name</label><br>
+        <input style="margin-bottom: 15px;" type="text" name="team_name" required><br>
+        <button type="button" class="custom-btn btn" onclick="submit_team_form()">Add</button>
+    </form>
+  </div>
+</div>
+
+<!-- Lederboard -->
+<div class="container">          
+  <table id="example" class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Team Name</th>
+        <th>Wins</th>
+        <th>Losses</th>
+        <th>Ties</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody id = "table-body">
+        <script type="text/javascript">
+            var team_names = [];
+        </script>
+    	   {% for team in teams %}
+    		    <tr>
+                    <td class="team_name">{{team.team_name}}</td>
+                    <td>{{team.wins}}</td>
+                    <td>{{team.losses}}</td>
+                    <td>{{team.ties}}</td>
+                    <td>{{team.score}}</td>
+                </tr>
+                <script type="text/javascript">
+                team_names.push("{{team.team_name}}");
+                </script>
+    	   {% endfor %}
+        </tbody>
+    </table>
+
+<!-- Paring teams -->
+<div>
+    <h2 style="text-align: center;">Compete</h2>
+    <div style="display: flex; padding: 3px; margin: 1px;">
+        <div style="padding-left: 15%; width: 100%">
+
+            <div style="display: flex;justify-content: center; padding: 3px;">
+                <p id="paringError" style="color: red"></p>
+            </div>
+
+            <div style="display: flex;justify-content: center; padding: 3px;">
+                <input id="team1" style="border-radius: 8px;border-color: #3d3d40;">
+                <span style="font-size: 150%; margin: 10px 10px 0px 10px"><b> VS </b></span>
+                <input id="team2" style="border-radius: 8px;border-color: #3d3d40;">
+            </div>
+
+            <div style="display: flex;justify-content: center; padding: 3px; padding-top: 10px">
+                <button type="button" class="custom-btn btn" onclick="win_loss()" >Win vs Loss</button>
+                <button style="margin: 0px 10px 0px 10px" type="button" class="custom-btn btn" onclick="tie()" >Tie</button>
+                <button type="button" class="custom-btn btn" onclick="loss_win()" >Loss vs Win</button>
+            </div>
+
+        </div>
+
+        <div style="display: flex; align-items: center;padding-right: 50px">
+            <button class="custom-btn btn" id="addTeamButton">Add New Team</button>
+        </div>
+
+    </div>
+    <!-- adding blank sapce at bottom -->
+    <div style="padding-bottom: 200px"></div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/paring.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/new_team.js') }}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#example').DataTable({
+            "order": [[ 4, "desc" ],[0, "asc"], [1, "desc"]]
+        });
+	} );
+
+    $( function() {
+    var availableTags = team_names;
+    $( "#team1" ).autocomplete({
+      source: availableTags
+    });
+    $( "#team2" ).autocomplete({
+      source: availableTags
+    });
+  } );
+</script>
+</div>
+{% endblock %}
