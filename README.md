@@ -6,6 +6,8 @@ Hacker Premier League is a problem statement posted in [Hackerearth](https://www
 
 The application was developed using Flask framework.
 
+Click [here](https://github.com/ajeeth-b/HackerPremierLeague/blob/main/PROBLEM%20STATEMENT.md) to view problem statement.
+
 Screenshots:
 
 ![Image](https://raw.githubusercontent.com/ajeeth-b/HackerPremierLeague/main/screenshots/main.jpg)
