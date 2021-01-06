@@ -38,7 +38,8 @@ Implement a backend in .NET/Java/C#/NodeJS/Python.
 **NOTE:** Use MongoDB
 
 **Dataset**
-[Click here]() to get sample data.
+
+[Click here](https://github.com/ajeeth-b/HackerPremierLeague/blob/main/dataset/data.json) to get sample data.
 
 
 **Deployment**
